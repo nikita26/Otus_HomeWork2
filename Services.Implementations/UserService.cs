@@ -1,5 +1,7 @@
-﻿using Domain.Entities;
+﻿using AutoMapper;
+using Domain.Entities;
 using Services.Abstractons;
+using Services.Contracts;
 using Services.Repositories.Abstractions;
 
 namespace Services.Implementations
@@ -8,14 +10,17 @@ namespace Services.Implementations
     {
 
         private readonly IUserRepository _userRepository;
+        private readonly IMapper _mapper;
 
-        public UserService(IUserRepository userRepository)
+        public UserService(IUserRepository userRepository,IMapper mapper)
         {
             _userRepository = userRepository;
+            _mapper = mapper;
         }
-        public Task Create(User comment)
+        public UserDto Create(UserDto user)
         {
-            throw new NotImplementedException();
+            var nU = _userRepository.Add(_mapper.Map<User>(user));
+            return _mapper.Map<UserDto>(nU);
         }
 
         public Task Delete(Guid id)
@@ -23,17 +28,17 @@ namespace Services.Implementations
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<User>> GetAll()
+        public IEnumerable<UserDto> GetAll()
+        {
+            return _mapper.Map<IEnumerable<UserDto>>(_userRepository.GetAll().ToList());
+        }
+
+        public Task<UserDto> GetById(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<User> GetById(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task Update(User comment)
+        public Task Update(UserDto comment)
         {
             throw new NotImplementedException();
         }

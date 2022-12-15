@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Services.Contracts;
 
 namespace Services.Abstractons
 {
@@ -8,28 +9,28 @@ namespace Services.Abstractons
         /// Получить все
         /// </summary>
         /// <returns></returns>
-        Task<IEnumerable<User>> GetAll();
+        IEnumerable<UserDto> GetAll();
 
         /// <summary>
         /// Получить по идентификатору
         /// </summary>
         /// <param name="id">Идентификатор пользователя</param>
         /// <returns></returns>
-        Task<User> GetById(Guid id);
+        Task<UserDto> GetById(Guid id);
 
         /// <summary>
         /// Создать
         /// </summary>
         /// <param name="comment"></param>
         /// <returns></returns>
-        Task Create(User comment);
+        UserDto Create(UserDto comment);
 
         /// <summary>
         /// Обновить
         /// </summary>
         /// <param name="comment"></param>
         /// <returns></returns>
-        Task Update(User comment);
+        Task Update(UserDto comment);
 
         /// <summary>
         /// Удалить
